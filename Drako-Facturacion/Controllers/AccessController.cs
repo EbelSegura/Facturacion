@@ -9,7 +9,7 @@ namespace Drako_Facturacion.Controllers
 {
     public class AccessController : Controller
     {
-        // GET: Access
+        
         public ActionResult Index()
         {
             return View();
