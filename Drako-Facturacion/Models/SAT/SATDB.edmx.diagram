@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9177fd8dbe6946adbacca1042d757cd4" Name="Diagram1">
+        <EntityTypeShape EntityType="SATModel.Cat_Periodicidad" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_Regimen" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_TipoComp" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_TipoContribuyente" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_UMedida" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_UsoCFDi" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_Years" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.FormasPago" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_MetodoPago" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_Pais" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_TPagoRet" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SATModel.Cat_ClaveProdServ" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_CodigoPostal" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_Exportacion" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_Impuesto" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_Meses" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_Moneda" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_MotivoCancelacion" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_TasaCuota" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_TRelacion" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_TRetencion" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_TipoCadenaPago" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SATModel.Cat_TipoDivUtil" Width="1.5" PointX="10.75" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cat_ClaveProdServ">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IvaTraslado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IEPSTraslado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_CodigoPostal">
+          <Key>
+            <PropertyRef Name="CP" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="CP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Exportacion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Impuesto">
+          <Key>
+            <PropertyRef Name="Impuesto" />
+          </Key>
+          <Property Name="Impuesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AplicaLocal" Type="bit" Nullable="false" />
+          <Property Name="Cuenta" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Meses">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAT.dbo.Cat_MetodoPago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cat_MetodoPago">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="51" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Moneda">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Uso" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_MotivoCancelacion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAT.dbo.Cat_Pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cat_Pais">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Periodicidad">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Regimen">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Fisica" Type="bit" Nullable="false" />
+          <Property Name="Moral" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TasaCuota">
+          <Key>
+            <PropertyRef Name="Impuesto" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Traslado" />
+            <PropertyRef Name="Retencion" />
+          </Key>
+          <Property Name="Impuesto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor" Type="money" Nullable="false" />
+          <Property Name="Traslado" Type="bit" Nullable="false" />
+          <Property Name="Retencion" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAT.dbo.Cat_TipoCadenaPago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cat_TipoCadenaPago">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TipoComp">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ValorMaximo" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Prioridad" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TipoContribuyente">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAT.dbo.Cat_TipoDivUtil' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cat_TipoDivUtil">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAT.dbo.Cat_TPagoRet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cat_TPagoRet">
+          <Key>
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="2" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TRelacion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Relacion" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TRetencion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_UMedida">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_UsoCFDi">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Fisica" Type="bit" Nullable="false" />
+          <Property Name="Moral" Type="bit" Nullable="false" />
+          <Property Name="Prioridad" Type="bit" Nullable="false" />
+          <Property Name="RegimenesFiscalesValidos" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Cat_Years">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormasPago">
+          <Key>
+            <PropertyRef Name="IdFormaPago" />
+          </Key>
+          <Property Name="IdFormaPago" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="PideCta" Type="bit" Nullable="false" />
+          <Property Name="NoOperacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RFCEmisOrd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CtaOrdenante" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatronOrdenante" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="RFCEmisBen" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CtaBeneficiario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatronBeneficiario" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TipoCadena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreBanco" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CodeCXC" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="SATModelStoreContainer">
+          <EntitySet Name="Cat_ClaveProdServ" EntityType="Self.Cat_ClaveProdServ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_CodigoPostal" EntityType="Self.Cat_CodigoPostal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Exportacion" EntityType="Self.Cat_Exportacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Impuesto" EntityType="Self.Cat_Impuesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Meses" EntityType="Self.Cat_Meses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Moneda" EntityType="Self.Cat_Moneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_MotivoCancelacion" EntityType="Self.Cat_MotivoCancelacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Periodicidad" EntityType="Self.Cat_Periodicidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Regimen" EntityType="Self.Cat_Regimen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_TasaCuota" EntityType="Self.Cat_TasaCuota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_TipoComp" EntityType="Self.Cat_TipoComp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_TipoContribuyente" EntityType="Self.Cat_TipoContribuyente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_TRelacion" EntityType="Self.Cat_TRelacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_TRetencion" EntityType="Self.Cat_TRetencion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_UMedida" EntityType="Self.Cat_UMedida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_UsoCFDi" EntityType="Self.Cat_UsoCFDi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Years" EntityType="Self.Cat_Years" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormasPago" EntityType="Self.FormasPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_MetodoPago" EntityType="Self.Cat_MetodoPago" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Cat_MetodoPago].[Codigo] AS [Codigo], 
+[Cat_MetodoPago].[Descripcion] AS [Descripcion]
+FROM [dbo].[Cat_MetodoPago] AS [Cat_MetodoPago]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Cat_Pais" EntityType="Self.Cat_Pais" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Cat_Pais].[Codigo] AS [Codigo], 
+[Cat_Pais].[Descripcion] AS [Descripcion], 
+[Cat_Pais].[Activo] AS [Activo]
+FROM [dbo].[Cat_Pais] AS [Cat_Pais]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Cat_TipoCadenaPago" EntityType="Self.Cat_TipoCadenaPago" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Cat_TipoCadenaPago].[Codigo] AS [Codigo], 
+[Cat_TipoCadenaPago].[Descripcion] AS [Descripcion]
+FROM [dbo].[Cat_TipoCadenaPago] AS [Cat_TipoCadenaPago]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Cat_TipoDivUtil" EntityType="Self.Cat_TipoDivUtil" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Cat_TipoDivUtil].[Codigo] AS [Codigo], 
+[Cat_TipoDivUtil].[Descripcion] AS [Descripcion]
+FROM [dbo].[Cat_TipoDivUtil] AS [Cat_TipoDivUtil]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Cat_TPagoRet" EntityType="Self.Cat_TPagoRet" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Cat_TPagoRet].[Codigo] AS [Codigo], 
+[Cat_TPagoRet].[Descripcion] AS [Descripcion]
+FROM [dbo].[Cat_TPagoRet] AS [Cat_TPagoRet]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cat_Periodicidad">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Regimen">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fisica" Type="Boolean" Nullable="false" />
+          <Property Name="Moral" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TipoComp">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ValorMaximo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prioridad" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TipoContribuyente">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_UMedida">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_UsoCFDi">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fisica" Type="Boolean" Nullable="false" />
+          <Property Name="Moral" Type="Boolean" Nullable="false" />
+          <Property Name="Prioridad" Type="Boolean" Nullable="false" />
+          <Property Name="RegimenesFiscalesValidos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_Years">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormasPago">
+          <Key>
+            <PropertyRef Name="IdFormaPago" />
+          </Key>
+          <Property Name="IdFormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PideCta" Type="Boolean" Nullable="false" />
+          <Property Name="NoOperacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RFCEmisOrd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CtaOrdenante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatronOrdenante" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RFCEmisBen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CtaBeneficiario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatronBeneficiario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipoCadena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreBanco" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodeCXC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_MetodoPago">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="51" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Pais">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TPagoRet">
+          <Key>
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SATEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cat_Periodicidad" EntityType="Self.Cat_Periodicidad" />
+          <EntitySet Name="Cat_Regimen" EntityType="Self.Cat_Regimen" />
+          <EntitySet Name="Cat_TipoComp" EntityType="Self.Cat_TipoComp" />
+          <EntitySet Name="Cat_TipoContribuyente" EntityType="Self.Cat_TipoContribuyente" />
+          <EntitySet Name="Cat_UMedida" EntityType="Self.Cat_UMedida" />
+          <EntitySet Name="Cat_UsoCFDi" EntityType="Self.Cat_UsoCFDi" />
+          <EntitySet Name="Cat_Years" EntityType="Self.Cat_Years" />
+          <EntitySet Name="FormasPago" EntityType="Self.FormasPago" />
+          <EntitySet Name="Cat_MetodoPago" EntityType="Self.Cat_MetodoPago" />
+          <EntitySet Name="Cat_Pais" EntityType="Self.Cat_Pais" />
+          <EntitySet Name="Cat_TPagoRet" EntityType="Self.Cat_TPagoRet" />
+          <EntitySet Name="Cat_ClaveProdServ" EntityType="SATModel.Cat_ClaveProdServ" />
+          <EntitySet Name="Cat_CodigoPostal" EntityType="SATModel.Cat_CodigoPostal" />
+          <EntitySet Name="Cat_Exportacion" EntityType="SATModel.Cat_Exportacion" />
+          <EntitySet Name="Cat_Impuesto" EntityType="SATModel.Cat_Impuesto" />
+          <EntitySet Name="Cat_Meses" EntityType="SATModel.Cat_Meses" />
+          <EntitySet Name="Cat_Moneda" EntityType="SATModel.Cat_Moneda" />
+          <EntitySet Name="Cat_MotivoCancelacion" EntityType="SATModel.Cat_MotivoCancelacion" />
+          <EntitySet Name="Cat_TasaCuota" EntityType="SATModel.Cat_TasaCuota" />
+          <EntitySet Name="Cat_TRelacion" EntityType="SATModel.Cat_TRelacion" />
+          <EntitySet Name="Cat_TRetencion" EntityType="SATModel.Cat_TRetencion" />
+          <EntitySet Name="Cat_TipoCadenaPago" EntityType="SATModel.Cat_TipoCadenaPago" />
+          <EntitySet Name="Cat_TipoDivUtil" EntityType="SATModel.Cat_TipoDivUtil" />
+        </EntityContainer>
+        <EntityType Name="Cat_ClaveProdServ">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IvaTraslado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IEPSTraslado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_CodigoPostal">
+          <Key>
+            <PropertyRef Name="CP" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="CP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_Exportacion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_Impuesto">
+          <Key>
+            <PropertyRef Name="Impuesto" />
+          </Key>
+          <Property Name="Impuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AplicaLocal" Type="Boolean" Nullable="false" />
+          <Property Name="Cuenta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_Meses">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_Moneda">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Uso" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_MotivoCancelacion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_TasaCuota">
+          <Key>
+            <PropertyRef Name="Impuesto" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Traslado" />
+            <PropertyRef Name="Retencion" />
+          </Key>
+          <Property Name="Impuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Traslado" Type="Boolean" Nullable="false" />
+          <Property Name="Retencion" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_TRelacion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Relacion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_TRetencion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_TipoCadenaPago">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cat_TipoDivUtil">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SATModelStoreContainer" CdmEntityContainer="SATEntities">
+          <EntitySetMapping Name="Cat_Periodicidad">
+            <EntityTypeMapping TypeName="SATModel.Cat_Periodicidad">
+              <MappingFragment StoreEntitySet="Cat_Periodicidad">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Regimen">
+            <EntityTypeMapping TypeName="SATModel.Cat_Regimen">
+              <MappingFragment StoreEntitySet="Cat_Regimen">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fisica" ColumnName="Fisica" />
+                <ScalarProperty Name="Moral" ColumnName="Moral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TipoComp">
+            <EntityTypeMapping TypeName="SATModel.Cat_TipoComp">
+              <MappingFragment StoreEntitySet="Cat_TipoComp">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TipoContribuyente">
+            <EntityTypeMapping TypeName="SATModel.Cat_TipoContribuyente">
+              <MappingFragment StoreEntitySet="Cat_TipoContribuyente">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_UMedida">
+            <EntityTypeMapping TypeName="SATModel.Cat_UMedida">
+              <MappingFragment StoreEntitySet="Cat_UMedida">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_UsoCFDi">
+            <EntityTypeMapping TypeName="SATModel.Cat_UsoCFDi">
+              <MappingFragment StoreEntitySet="Cat_UsoCFDi">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fisica" ColumnName="Fisica" />
+                <ScalarProperty Name="Moral" ColumnName="Moral" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="RegimenesFiscalesValidos" ColumnName="RegimenesFiscalesValidos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Years">
+            <EntityTypeMapping TypeName="SATModel.Cat_Years">
+              <MappingFragment StoreEntitySet="Cat_Years">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormasPago">
+            <EntityTypeMapping TypeName="SATModel.FormasPago">
+              <MappingFragment StoreEntitySet="FormasPago">
+                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="PideCta" ColumnName="PideCta" />
+                <ScalarProperty Name="NoOperacion" ColumnName="NoOperacion" />
+                <ScalarProperty Name="RFCEmisOrd" ColumnName="RFCEmisOrd" />
+                <ScalarProperty Name="CtaOrdenante" ColumnName="CtaOrdenante" />
+                <ScalarProperty Name="PatronOrdenante" ColumnName="PatronOrdenante" />
+                <ScalarProperty Name="RFCEmisBen" ColumnName="RFCEmisBen" />
+                <ScalarProperty Name="CtaBeneficiario" ColumnName="CtaBeneficiario" />
+                <ScalarProperty Name="PatronBeneficiario" ColumnName="PatronBeneficiario" />
+                <ScalarProperty Name="TipoCadena" ColumnName="TipoCadena" />
+                <ScalarProperty Name="NombreBanco" ColumnName="NombreBanco" />
+                <ScalarProperty Name="CodeCXC" ColumnName="CodeCXC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_MetodoPago">
+            <EntityTypeMapping TypeName="SATModel.Cat_MetodoPago">
+              <MappingFragment StoreEntitySet="Cat_MetodoPago">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Pais">
+            <EntityTypeMapping TypeName="SATModel.Cat_Pais">
+              <MappingFragment StoreEntitySet="Cat_Pais">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TPagoRet">
+            <EntityTypeMapping TypeName="SATModel.Cat_TPagoRet">
+              <MappingFragment StoreEntitySet="Cat_TPagoRet">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_ClaveProdServ">
+            <EntityTypeMapping TypeName="SATModel.Cat_ClaveProdServ">
+              <MappingFragment StoreEntitySet="Cat_ClaveProdServ">
+                <ScalarProperty Name="IEPSTraslado" ColumnName="IEPSTraslado" />
+                <ScalarProperty Name="IvaTraslado" ColumnName="IvaTraslado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_CodigoPostal">
+            <EntityTypeMapping TypeName="SATModel.Cat_CodigoPostal">
+              <MappingFragment StoreEntitySet="Cat_CodigoPostal">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Exportacion">
+            <EntityTypeMapping TypeName="SATModel.Cat_Exportacion">
+              <MappingFragment StoreEntitySet="Cat_Exportacion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Impuesto">
+            <EntityTypeMapping TypeName="SATModel.Cat_Impuesto">
+              <MappingFragment StoreEntitySet="Cat_Impuesto">
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="AplicaLocal" ColumnName="AplicaLocal" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Meses">
+            <EntityTypeMapping TypeName="SATModel.Cat_Meses">
+              <MappingFragment StoreEntitySet="Cat_Meses">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Moneda">
+            <EntityTypeMapping TypeName="SATModel.Cat_Moneda">
+              <MappingFragment StoreEntitySet="Cat_Moneda">
+                <ScalarProperty Name="Uso" ColumnName="Uso" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_MotivoCancelacion">
+            <EntityTypeMapping TypeName="SATModel.Cat_MotivoCancelacion">
+              <MappingFragment StoreEntitySet="Cat_MotivoCancelacion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TasaCuota">
+            <EntityTypeMapping TypeName="SATModel.Cat_TasaCuota">
+              <MappingFragment StoreEntitySet="Cat_TasaCuota">
+                <ScalarProperty Name="Retencion" ColumnName="Retencion" />
+                <ScalarProperty Name="Traslado" ColumnName="Traslado" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TRelacion">
+            <EntityTypeMapping TypeName="SATModel.Cat_TRelacion">
+              <MappingFragment StoreEntitySet="Cat_TRelacion">
+                <ScalarProperty Name="Relacion" ColumnName="Relacion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TRetencion">
+            <EntityTypeMapping TypeName="SATModel.Cat_TRetencion">
+              <MappingFragment StoreEntitySet="Cat_TRetencion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TipoCadenaPago">
+            <EntityTypeMapping TypeName="SATModel.Cat_TipoCadenaPago">
+              <MappingFragment StoreEntitySet="Cat_TipoCadenaPago">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_TipoDivUtil">
+            <EntityTypeMapping TypeName="SATModel.Cat_TipoDivUtil">
+              <MappingFragment StoreEntitySet="Cat_TipoDivUtil">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

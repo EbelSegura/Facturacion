@@ -1,0 +1,28 @@
+﻿@model Drako_Facturacion.Models.ViewModels.FacturaViewModel.Concepto
+@{
+    Layout = null;
+}
+<div class="">
+    <label>Cantidad </label>
+    @Model.cantidad<br />
+    <label>Precio </label>
+    @Model.precioUnitario<br />
+    <label>Descripción </label>
+    @Model.descripcion<br />
+    <label>Clave producto/servicio </label>
+    @Model.claveProducto<br />
+    <label>Clave unidad </label>
+    @Model.claveUnidad<br />
+    <label>Descuento </label>
+    @Model.descuento<br />
+    <label>Importe</label>
+    @Html.Raw(Model.cantidad * Model.precioUnitario)
+
+    <input type="hidden" name="pagos.Index" id="conceptos.Index" value="@Model.numConcepto" />
+    <input type="hidden" value="@Model.cantidad" name="conceptos[@Model.numConcepto].cantidad" id="pagos[@Model.numConcepto].cantidad" />
+    <input type="hidden" value="@Model.precioUnitario" name="conceptos[@Model.numConcepto].precioUnitario" id="pagos[@Model.numConcepto].precioUnitario" />
+    <input type="hidden" value="@Model.claveProducto" name="conceptos[@Model.numConcepto].claveProducto" id="pagos[@Model.numConcepto].claveProducto" />
+    <input type="hidden" value="@Model.claveUnidad" name="conceptos[@Model.numConcepto].claveUnidad" id="pagos[@Model.numConcepto].claveUnidad" />
+    <input type="hidden" value="@Model.descuento" name="conceptos[@Model.numConcepto].descuento" id="pagos[@Model.numConcepto].descuento" />
+    <input type="hidden" value="@Model.descripcion" name="conceptos[@Model.numConcepto].descripcion" id="pagos[@Model.numConcepto].descripcion" />
+</div>

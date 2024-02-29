@@ -1,0 +1,185 @@
+﻿@model Drako_Facturacion.Models.ViewModels.FacturaViewModel
+@{
+    ViewBag.Title = "Nueva Factura";
+    SelectList lstFormaPago = (SelectList)ViewBag.lstFormaPago;
+    SelectList lstMetodoDePago = (SelectList)ViewBag.lstMetodoDePago;
+    SelectList lstUsoCfdi = (SelectList)ViewBag.lstUsoCFDi;
+    SelectList lstMoneda = (SelectList)ViewBag.lstMoneda;
+    SelectList lstRegimenFiscal = (SelectList)ViewBag.lstRegimenFiscal;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form action="@Url.Content("~/Invoice/Save")" ; method="post">
+    <div class="tab-content">
+        <div class="tab-pane active container" id="general">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(d => d.Serie)
+                    @Html.TextBoxFor(d => d.Serie, "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(d => d.Folio)
+                    @Html.TextBoxFor(d => d.Folio, "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(d => d.Fecha)
+                    @Html.TextBoxFor(d => d.Fecha, "", new { @class = "form-control" })
+                </div>
+
+            </div>
+
+            <hr />
+            <h5>Datos Del Cliente</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.RFCCliente)
+                    @Html.TextBoxFor(d => d.RFCCliente, "", new { @class = "form-control" })
+
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.RazonSocial)
+                    @Html.TextBoxFor(d => d.RazonSocial, "", new { @class = "form-control" })
+
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(d => d.CP)
+                    @Html.TextBoxFor(d => d.CP, "", new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <hr />
+            <h5>Conceptos</h5>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Tipo De Pago</label>
+                    @Html.DropDownListFor(d => d.TipoDePago, lstMetodoDePago, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    <label>Forma De Pago</label>
+                    @Html.DropDownListFor(d => d.FormaPago, lstFormaPago, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    <label>Uso CFDI</label>
+                    @Html.DropDownListFor(d => d.UsoCFDI, lstUsoCfdi, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    <label>Tipo Moneda</label>
+                    @Html.DropDownListFor(d => d.Moneda, lstMoneda, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Clave Producto/Servicio</label>
+                    @Html.TextBox("ClaveProducto", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    <label>Descripcion</label>
+                    @Html.TextBox("descripcion", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    <label>Clave Unidad</label>
+                    @Html.TextBox("ClaveUnidad", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-1">
+                    <label>Cantidad</label>
+                    @Html.TextBox("Cantidad", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-1">
+                    <label>Precio</label>
+                    @Html.TextBox("precioUnitario", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-1">
+                    <label>Descuento</label>
+                    @Html.TextBox("descuento", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-1" style="text-align:right">
+                    <br />
+                    <input onclick="jsAddConcepto();" type="button" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+
+            <div class="row">
+
+
+            </div>
+            <div class="row" id="divConceptos">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(d => d.ClavePrivada)
+            @Html.TextBoxFor(d => d.ClavePrivada, "", new { @class = "form-control" })
+
+        </div>
+        <div style="text-align:right" class="col-md-6">
+
+            <input type="submit" value="Timbrar" class="btn btn-primary" />
+        </div>
+    </div>
+
+</form>
+
+@section scripts{
+    <script>
+        var numConcepto = 0;
+        $(document).ready(function () {
+
+            $("#ClaveProducto").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.Content("~/Json/ProductosServicios")",
+                        type: "POST",
+                        dataType: "json",
+                        data: { cad: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Value, Value: item.Value };
+                            }))
+                        }
+                    })
+                }
+            });
+
+
+            $("#ClaveUnidad").autocomplete({
+                source: function (request,response) {
+                    $.ajax({
+                        url: "@Url.Content("~/Json/ClaveUnidad")",
+                        type: "POST",
+                        dataType: "json",
+                        data: { cad: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Value, Value: item.Value };
+                            }))
+                        }
+                    })
+                }
+            })
+
+        })
+
+
+        function jsAddConcepto(){
+            var parametros = $("#general :input").serialize() + "&numConcepto=" + numConcepto;
+            var url = "@Url.Content("~/Invoice/AddConcepto")"
+
+            $.post(url, parametros, function (data) {
+
+                $("#divConceptos").append(data);
+
+            })
+
+            numConcepto++;
+
+        }
+    </script>    
+}
