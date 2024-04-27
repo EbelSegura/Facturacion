@@ -19,6 +19,7 @@ namespace Drako_Facturacion.Business
         Comprobante oComprobante;
         private string error = "";
         private string pathXML = @"C:\Users\ebels\source\repos\Drako-Facturacion\FACTURA.xml";
+        private string pathXMLTimbrado = @"C:\Users\ebels\source\repos\Drako-Facturacion\FacturaTimbrada.xml";
         private string pathCadenaOriginal = @"C:\Users\ebels\source\repos\Drako-Facturacion\xslt4.0\cadenaoriginal_4_0.xslt";
         private string pathCer = @"C:\Users\ebels\source\repos\Drako-Facturacion\Drako-Facturacion\Files\CSD_Sucursal_1_EKU9003173C9_20230517_223850.cer";
         private string pathKey = @"C:\Users\ebels\source\repos\Drako-Facturacion\Drako-Facturacion\Files\CSD_Sucursal_1_EKU9003173C9_20230517_223850.key";
@@ -56,13 +57,18 @@ namespace Drako_Facturacion.Business
 
         private void CreateXML()
         {
+            decimal totalDescuento = 0,totalConceptos = 0;
+            string numeroCertificado, aa, b, c;
+            SelloDigital.leerCER(pathCer, out aa, out b, out c, out numeroCertificado);
+
+
             oComprobante.Version = "4.0";
             oComprobante.Serie = oFactura.Serie;
             oComprobante.Folio = oFactura.Folio.ToString();
             oComprobante.Fecha = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
             //oComprobante.Sello = ""; //FALTANTE
-            oComprobante.FormaPago = "99";
-            //oComprobante.NoCertificado = numerocertificado; PENDIENTE
+            oComprobante.FormaPago = oFactura.FormaPago;
+            oComprobante.NoCertificado = numeroCertificado; 
             //oComprobante.Certificado = ""; //FALTANTE
             //oComprobante.SubTotal = 10m; SE VAN A CALCULAR
             //oComprobante.Descuento = 1m; SE VAN A CALCULAR
@@ -73,14 +79,17 @@ namespace Drako_Facturacion.Business
             oComprobante.LugarExpedicion = "54720";
 
             ComprobanteEmisor oEmisor = new ComprobanteEmisor();
-            oEmisor.Rfc = "AEN001011AJ9";
-            oEmisor.Nombre = "ARPON ENTERPRISE";
-            oEmisor.RegimenFiscal = "605";
+            oEmisor.Rfc = "EKU9003173C9";
+            oEmisor.Nombre = "ESCUELA KEMPER URGATE";
+            oEmisor.RegimenFiscal = "601";
 
             ComprobanteReceptor oReceptor = new ComprobanteReceptor();
-            oReceptor.Rfc = oFactura.RazonSocial;
-            oReceptor.Nombre = oFactura.RFCCliente;
-            oReceptor.DomicilioFiscalReceptor = oFactura.UsoCFDI;
+            oReceptor.Rfc = oFactura.RFCCliente;
+            oReceptor.Nombre = oFactura.RazonSocial;
+            oReceptor.UsoCFDI = oFactura.UsoCFDI;
+            oReceptor.RegimenFiscalReceptor = oFactura.UsoCFDI;
+            oReceptor.DomicilioFiscalReceptor = oFactura.CP;
+            //oReceptor.UsoCFDI = oFactura.LugarExpedicion;
 
             //ASIGNO EMISOR Y RECEPTOR
             oComprobante.Emisor = oEmisor;
@@ -88,7 +97,10 @@ namespace Drako_Facturacion.Business
 
             List<ComprobanteConcepto> lstConceptos = new List<ComprobanteConcepto>();
             foreach (Concepto oConceptoVM in oFactura.conceptos) {
+
+                decimal importeTotal = oConceptoVM.cantidad * oConceptoVM.precioUnitario;
                 ComprobanteConcepto oConcepto = new ComprobanteConcepto();
+                
                 oConcepto.ClaveProdServ = oConceptoVM.claveProducto;
                 oConcepto.Cantidad = oConceptoVM.cantidad;
                 oConcepto.ClaveUnidad = oConceptoVM.claveUnidad;
@@ -97,10 +109,20 @@ namespace Drako_Facturacion.Business
                 oConcepto.Descuento = oConceptoVM.descuento == null? 0: (decimal) oConceptoVM.descuento;
                 oConcepto.Importe = (oConceptoVM.cantidad*oConceptoVM.precioUnitario);
                 oConcepto.ObjetoImp = "02";
+                
                 lstConceptos.Add(oConcepto);
+
+                totalConceptos += importeTotal;
+                if (oConceptoVM.descuento != null && oConceptoVM.descuento < 0)
+                    totalDescuento += (decimal)oConceptoVM.descuento;
             }
 
             oComprobante.Conceptos = lstConceptos.ToArray();
+
+            if(totalDescuento > 0)
+                oComprobante.Descuento = totalDescuento;
+                oComprobante.SubTotal = totalConceptos;
+            oComprobante.Total = totalConceptos - totalDescuento;
 
             CreateXMLFile();
 
@@ -127,7 +149,10 @@ namespace Drako_Facturacion.Business
 
         private void TimbrarXML()
         {
-
+            byte[] bXml = System.IO.File.ReadAllBytes(pathXML);
+            Timbrado.Timbrado oTimbrar = new Timbrado.Timbrado();
+            oTimbrar.Timbrar(bXml);
+            System.IO.File.WriteAllBytes(pathXMLTimbrado, oTimbrar.XMLTimbrado);
         }
 
         #region Helpers

@@ -82,7 +82,8 @@ namespace Drako_Facturacion.Controllers
             //USO MONEDA
             var lstMoneda = from d in db2.Cat_Moneda
                             where d.Codigo == "MXN" || d.Codigo == "USD"
-                            select new { code = d.Codigo, name = d.Descripcion };
+                            select new { code = d.Codigo, name = d.Codigo };
+                            //select new { code = d.Codigo, name = d.Descripcion };
             SelectList slcMoneda = new SelectList(lstMoneda, "name", "code");
 
             ViewBag.lstMoneda = slcMoneda;

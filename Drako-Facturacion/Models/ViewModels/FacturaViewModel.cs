@@ -199,7 +199,7 @@ namespace Drako_Facturacion.Models.ViewModels
         public string Localidad { get; set; }
 
 
-        [Display(Name = "Código postal")]
+        [Display(Name = "*Código postal")]
         public string CP { get; set; }
 
         [Display(Name = "País")]
@@ -224,10 +224,10 @@ namespace Drako_Facturacion.Models.ViewModels
         #endregion
 
         #region DATOS MONTOS
-        public decimal Subtotal { get; set; }
-        public decimal Total { get; set; }
+        public float Subtotal { get; set; }
+        public float Total { get; set; }
 
-        public decimal TotalDescuento { get; set; }
+        public float TotalDescuento { get; set; }
 
         public decimal TotalFederalTraslado { get; set; }
         public decimal TotalFederalRetenido { get; set; }
