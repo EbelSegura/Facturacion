@@ -224,10 +224,10 @@ namespace Drako_Facturacion.Models.ViewModels
         #endregion
 
         #region DATOS MONTOS
-        public float Subtotal { get; set; }
-        public float Total { get; set; }
+        public string Subtotal { get; set; }
+        public string Total { get; set; }
 
-        public float TotalDescuento { get; set; }
+        public string TotalDescuento { get; set; }
 
         public decimal TotalFederalTraslado { get; set; }
         public decimal TotalFederalRetenido { get; set; }

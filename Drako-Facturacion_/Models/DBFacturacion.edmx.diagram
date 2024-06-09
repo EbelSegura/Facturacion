@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7dfa4bcee11b40809b21addc189d9f01" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="FacturacionModel.cstate" Width="1.5" PointX="0.75" PointY="3.125" />
+        <EntityTypeShape EntityType="FacturacionModel.cstate_factura" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FacturacionModel.ctype_facturacion" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="FacturacionModel.customer" Width="1.5" PointX="8.25" PointY="9.125" />
+        <EntityTypeShape EntityType="FacturacionModel.factura" Width="1.5" PointX="5.25" PointY="15.5" />
+        <EntityTypeShape EntityType="FacturacionModel.product" Width="1.5" PointX="5.25" PointY="4.125" />
+        <EntityTypeShape EntityType="FacturacionModel.producto_tax" Width="1.5" PointX="7.5" PointY="5.375" />
+        <EntityTypeShape EntityType="FacturacionModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FacturacionModel.tax" Width="1.5" PointX="5.25" PointY="9" />
+        <EntityTypeShape EntityType="FacturacionModel.users" Width="1.5" PointX="3" PointY="15.75" />
+        <AssociationConnector Association="FacturacionModel.fx_customer_state" />
+        <AssociationConnector Association="FacturacionModel.fx_product_state" />
+        <AssociationConnector Association="FacturacionModel.fx_tax_State" />
+        <AssociationConnector Association="FacturacionModel.fx_users_cState" />
+        <AssociationConnector Association="FacturacionModel.fx_factura_type" />
+        <AssociationConnector Association="FacturacionModel.fx_customer_user" />
+        <AssociationConnector Association="FacturacionModel.fx_factura_user" />
+        <AssociationConnector Association="FacturacionModel.fx_product_user" />
+        <AssociationConnector Association="FacturacionModel.fx_pt_product" />
+        <AssociationConnector Association="FacturacionModel.fx_pt_tax" />
+        <AssociationConnector Association="FacturacionModel.fx_tax_user" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

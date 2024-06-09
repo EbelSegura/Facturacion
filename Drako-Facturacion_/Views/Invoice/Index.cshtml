@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Nueva Factura";
+}
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" value="Nueva Factura" class="btn btn-primary" onclick="jsOpenNew();"/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function jsOpenNew() {
+
+            document.location.href="@Url.Content("~/Invoice/Add")"
+
+        }
+    </script>    
+}
